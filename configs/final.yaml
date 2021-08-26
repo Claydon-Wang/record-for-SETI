@@ -1,0 +1,87 @@
+NAME: SETI
+DESC: Search0715.csv
+NUM_GPUS: 
+ - 0
+VAL_PERIOD: 1
+DATA:
+  TRAIN:
+    TYPE: seti
+    PATH: ../../Datasets/seti/seti/
+    BATCH_SIZE: 16
+    NUM_WORKERS: 16
+    USE_AUG: True
+    DROPLAST: True
+    USE_A_LIB: True
+    AUG: 
+        - - AResize
+          - - 512 
+            - 512
+        - - AHorizontalFlip
+          - - 0.5
+        - - AVerticalFlip
+          - - 0.5
+        - - AShiftScaleRotate
+          - - 0.2
+            - 0.2
+        - - ARandomResizedCrop
+          - - 512
+            - 512 
+            - - 0.9
+              - 1.0
+        - - AToTensorV2
+          - []       
+  VAL:
+    TYPE: seti
+    PATH: ../../Datasets/seti/seti/
+    BATCH_SIZE: 16
+    NUM_WORKERS: 16
+    USE_AUG: True
+    DROPLAST: True
+    USE_A_LIB: True
+    AUG: 
+        - - AResize
+          - - 512 
+            - 512
+        - - AToTensorV2
+          - []     
+  TEST:
+    TYPE: seti
+    PATH: ../../Datasets/seti/seti/
+    BATCH_SIZE: 16
+    NUM_WORKERS: 16
+    USE_AUG: True
+    USE_A_LIB: True
+    AUG: 
+        - - AResize
+          - - 512 
+            - 512
+        - - AToTensorV2
+          - []  
+    
+MODEL:
+  NAME: tf_efficientnet_b0_ns
+  PRETRAIN: True
+  SELF_HEAD: True
+  OUTPUT_DIM: 1
+  NUM_CLASSES: 
+      - null
+      - 512
+      - 1
+  IN_CHANS: 1
+  DROPOUT: 0.5
+
+OPTIM:
+  OPT: adamw
+  WEIGHT_DECAY: 1e-2
+  EPOCHS: 20
+  LR: 1e-3
+  LR_POLICY: onecyclelr
+    
+TRAINOR:
+  LOSSNAME: BCEWithLogitsLoss
+  METRIC: auc
+  LOG_PERIOD: 20
+  USE_MIXUP: True
+  ALPHA: 1.0
+    
+    
