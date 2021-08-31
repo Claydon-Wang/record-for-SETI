@@ -1,0 +1,5 @@
+*.pth
+*.pyc
+.ipynb_checkpoints
+submission.csv
+submission_best.csv

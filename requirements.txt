@@ -1,0 +1,22 @@
+numpy==1.19.5
+timm
+--ignore-installed imageio==2.8.0
+albumentations==1.0.2
+dataclasses 
+ConfigArgParse==1.4
+json5==0.9.5
+jsonschema==3.2.0
+lmdb==1.2.1
+opencv-python==4.5.1.48
+torch==1.8.1
+torchvision==0.9.1
+pandas
+parso
+Pillow
+pyarrow
+pytz==2021.1
+scikit-image
+scikit-learn
+scipy
+sklearn
+yacs==0.1.8
